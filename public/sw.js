@@ -1,9 +1,9 @@
 const CACHE_NAME = 'slate-offline-cache-v1';
 const PRECACHE_ASSETS = [
-  '/',
-  '/index.html',
-  '/logo.svg',
-  '/manifest.json'
+  './',
+  'index.html',
+  'logo.svg',
+  'manifest.json'
 ];
 
 // 1. Install event: Cache the essential shell app assets
@@ -59,7 +59,7 @@ self.addEventListener('fetch', (event) => {
             console.warn('[Service Worker] Network fetch failed, falling back to cache if available:', err);
             // If cache is empty and network fails, check if request is for document/navigation and return index shell
             if (event.request.mode === 'navigate') {
-              return caches.match('/');
+              return caches.match('./');
             }
           });
 
