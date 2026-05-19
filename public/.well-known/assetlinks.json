@@ -7,7 +7,8 @@
       "namespace": "android_app",
       "package_name": "com.iefanx.slate.twa",
       "sha256_cert_fingerprints": [
-        "31:0A:9A:A6:8F:DE:14:33:70:6F:DA:A5:77:AF:46:C8:23:75:9A:C3:27:BD:3C:DE:50:F2:D3:09:43:ED:0B:D0"
+        "31:0A:9A:A6:8F:DE:14:33:70:6F:DA:A5:77:AF:46:C8:23:75:9A:C3:27:BD:3C:DE:50:F2:D3:09:43:ED:0B:D0",
+        "54:62:77:73:61:AE:7F:5B:FA:3C:86:2A:6A:40:64:2A:B8:3B:AC:8C:C0:D8:8C:B7:DA:60:EB:82:1F:3B:1C:2A"
       ]
     }
   }
