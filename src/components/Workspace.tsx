@@ -305,7 +305,7 @@ export const Workspace: React.FC<WorkspaceProps> = ({
       <footer style={styles.footer} className="workspace-footer">
         <div style={styles.footerSection}>
           <Wifi size={12} style={{ marginRight: '4px', opacity: 0.8 }} />
-          <span style={styles.footerLabel} className="desktop-only">environment:</span>
+          <span style={styles.footerLabel} className="desktop-only">connected to:</span>
           <span style={styles.footerVal}>{simulatedNetwork || 'Offline Sandbox'}</span>
         </div>
         <div style={styles.footerSection}>
