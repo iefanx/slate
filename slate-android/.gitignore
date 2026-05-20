@@ -1,0 +1,14 @@
+# Gradle build files
+.gradle/
+build/
+app/build/
+local.properties
+
+# Generated APKs/AABs
+*.apk
+*.aab
+*.idsig
+
+# Key stores
+*.keystore
+*.jks
