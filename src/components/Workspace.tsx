@@ -92,6 +92,17 @@ function parseMarkdown(md: string): string {
   return output;
 }
 
+export const SlateLogoSmall: React.FC<{ size?: number; style?: React.CSSProperties }> = ({ size = 22, style }) => (
+  <svg width={size} height={size} viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ ...style, display: 'inline-block', verticalAlign: 'middle' }}>
+    {/* Background slate plate */}
+    <rect x="8" y="14" width="32" height="32" rx="4" transform="rotate(-10 8 14)" fill="var(--text)" fillOpacity="0.15" stroke="var(--text)" strokeWidth="1.5" />
+    {/* Foreground slate plate */}
+    <rect x="16" y="10" width="32" height="32" rx="4" transform="rotate(-3 16 10)" fill="var(--text)" stroke="var(--text)" strokeWidth="1.5" />
+    {/* The "S" character inside the foreground slate in beautiful Georgia/serif style */}
+    <text x="32" y="30" fill="var(--bg)" fontSize="18" fontFamily="var(--font-serif)" fontWeight="bold" textAnchor="middle" dominantBaseline="middle" transform="rotate(-3 32 30)">S</text>
+  </svg>
+);
+
 export const Workspace: React.FC<WorkspaceProps> = ({
   activeNote,
   editorContent,
@@ -117,7 +128,9 @@ export const Workspace: React.FC<WorkspaceProps> = ({
     const handleResize = () => {
       const isMobileNow = window.innerWidth < 900;
       if (isMobileNow !== wasMobile) {
-        setViewMode(isMobileNow ? 'write' : 'split');
+        if (isMobileNow) {
+          setViewMode(prev => prev === 'split' ? 'write' : prev);
+        }
         wasMobile = isMobileNow;
       }
     };
@@ -161,8 +174,7 @@ export const Workspace: React.FC<WorkspaceProps> = ({
           </button>
           
           <div style={styles.logoContainer}>
-            <span style={styles.logoText}>Slate</span>
-            <span style={isDirty ? styles.modifiedDot : styles.savedDot} />
+            <SlateLogoSmall size={22} />
           </div>
 
           <span style={styles.noteStatus} className="desktop-only">
@@ -308,6 +320,12 @@ export const Workspace: React.FC<WorkspaceProps> = ({
       {/* Editor Footer Metrics */}
       <footer style={styles.footer} className="workspace-footer">
         <div style={styles.footerSection}>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', marginRight: '12px' }}>
+            <span style={isDirty ? styles.modifiedDotSmall : styles.savedDotSmall} />
+            <span style={{ fontSize: '11px', fontFamily: 'var(--font-mono)' }}>
+              {isDirty ? 'syncing' : 'saved'}
+            </span>
+          </span>
           <Wifi size={12} style={{ marginRight: '4px', opacity: 0.8 }} />
           <span style={styles.footerLabel} className="desktop-only">environment:</span>
           <span style={styles.footerVal}>{simulatedNetwork || 'Offline Sandbox'}</span>
@@ -554,6 +572,21 @@ const styles: { [key: string]: React.CSSProperties } = {
   footerSeparator: {
     margin: '0 8px',
     opacity: 0.3,
+  },
+  savedDotSmall: {
+    width: '6px',
+    height: '6px',
+    borderRadius: '50%',
+    backgroundColor: '#10b981', // green
+    display: 'inline-block',
+  },
+  modifiedDotSmall: {
+    width: '6px',
+    height: '6px',
+    borderRadius: '50%',
+    backgroundColor: '#f59e0b', // orange
+    animation: 'pulseGlow 1.5s infinite',
+    display: 'inline-block',
   },
 };
 export default Workspace;

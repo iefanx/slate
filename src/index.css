@@ -303,11 +303,28 @@ kbd {
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
+    flex-shrink: 0 !important;
   }
 
   .control-bar button svg {
     margin-right: 0 !important;
     margin-left: 0 !important;
+  }
+
+  /* Non-wrapping, horizontally scrollable control bar on mobile viewports */
+  .control-bar {
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important; /* Firefox */
+    max-width: 100% !important;
+    margin-left: auto !important;
+    gap: 6px !important;
+    padding-bottom: 2px !important;
+  }
+
+  .control-bar::-webkit-scrollbar {
+    display: none !important; /* Safari and Chrome */
   }
 
   .desktop-only {
