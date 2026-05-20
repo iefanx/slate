@@ -20,8 +20,8 @@
     "path": "/Users/iefan/code/antigravity/slate/slate-android/android.keystore",
     "alias": "android"
   },
-  "appVersionName": "4",
-  "appVersionCode": 4,
+  "appVersionName": "10",
+  "appVersionCode": 10,
   "shortcuts": [],
   "generatorApp": "bubblewrap-cli",
   "webManifestUrl": "https://iefanx.github.io/slate/manifest.json",
