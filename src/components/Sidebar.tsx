@@ -53,8 +53,8 @@ function getNoteSnippet(content: string): string {
   return bodyText || 'Empty canvas...';
 }
 
-export const SlateLogoSmall: React.FC<{ size?: number; style?: React.CSSProperties }> = ({ size = 20, style }) => (
-  <svg width={size} height={size} viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ ...style, display: 'inline-block', verticalAlign: 'middle' }}>
+export const SlateLogoSmall: React.FC<{ size?: number; style?: React.CSSProperties }> = ({ size = 26, style }) => (
+  <svg width={size} height={size} viewBox="5 5 46 46" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ ...style, display: 'inline-block', verticalAlign: 'middle' }}>
     {/* Background slate plate */}
     <rect x="8" y="14" width="32" height="32" rx="4" transform="rotate(-10 8 14)" fill="var(--text)" fillOpacity="0.15" stroke="var(--text)" strokeWidth="1.5" />
     {/* Foreground slate plate */}
@@ -123,7 +123,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       {/* Sidebar Header Title & New Action */}
       <div style={styles.header}>
         <div style={styles.logoArea}>
-          <SlateLogoSmall size={20} />
+          <SlateLogoSmall size={26} />
           <span style={styles.logoText}>Slate</span>
           <span style={styles.versionBadge}>v1.0</span>
         </div>

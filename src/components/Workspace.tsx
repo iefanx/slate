@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Eye, Edit2, Share2, Shield, ShieldOff, Sparkles, Menu, Trash2, Wifi, Check, Columns } from 'lucide-react';
+import { Eye, Edit2, Share2, Shield, ShieldOff, Menu, Trash2, Wifi, Check, Columns } from 'lucide-react';
 import type { DecryptedNote } from '../db/database';
 import { generateShareUrl } from '../services/compressor';
 
@@ -92,8 +92,8 @@ function parseMarkdown(md: string): string {
   return output;
 }
 
-export const SlateLogoSmall: React.FC<{ size?: number; style?: React.CSSProperties }> = ({ size = 22, style }) => (
-  <svg width={size} height={size} viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ ...style, display: 'inline-block', verticalAlign: 'middle' }}>
+export const SlateLogoSmall: React.FC<{ size?: number; style?: React.CSSProperties }> = ({ size = 28, style }) => (
+  <svg width={size} height={size} viewBox="5 5 46 46" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ ...style, display: 'inline-block', verticalAlign: 'middle' }}>
     {/* Background slate plate */}
     <rect x="8" y="14" width="32" height="32" rx="4" transform="rotate(-10 8 14)" fill="var(--text)" fillOpacity="0.15" stroke="var(--text)" strokeWidth="1.5" />
     {/* Foreground slate plate */}
@@ -111,14 +111,10 @@ export const Workspace: React.FC<WorkspaceProps> = ({
   onToggleGhost,
   simulatedNetwork,
   isDirty,
-  onTriggerSimilarity,
-  hasSimilarNotes,
   onToggleSidebar,
   onDelete,
 }) => {
-  const [viewMode, setViewMode] = useState<'write' | 'preview' | 'split'>(
-    window.innerWidth < 900 ? 'write' : 'split'
-  );
+  const [viewMode, setViewMode] = useState<'write' | 'preview' | 'split'>('write');
   const [shareCopied, setShareCopied] = useState<boolean>(false);
 
   // Sync editor mode with screen size on load
@@ -174,7 +170,7 @@ export const Workspace: React.FC<WorkspaceProps> = ({
           </button>
           
           <div style={styles.logoContainer}>
-            <SlateLogoSmall size={22} />
+            <SlateLogoSmall size={28} />
           </div>
 
           <span style={styles.noteStatus} className="desktop-only">
@@ -184,70 +180,7 @@ export const Workspace: React.FC<WorkspaceProps> = ({
         </div>
 
         <div style={styles.controlBar} className="control-bar">
-          {/* Ambient vector cluster glow indicator */}
-          {hasSimilarNotes && (
-            <button
-              onClick={onTriggerSimilarity}
-              style={{ ...styles.glowButton, animation: 'pulseGlow 2s infinite' }}
-              title="Conceptual connection discovered! Click to reveal matches."
-            >
-              <Sparkles size={14} style={{ marginRight: '6px' }} />
-              <span className="btn-label">Connected Mind</span>
-            </button>
-          )}
-
-          {/* Erase Thought (only visible when a note is loaded) */}
-          {activeNote && (
-            <button
-              onClick={onDelete}
-              style={styles.deleteButton}
-              title="Wipe this thought permanently from IndexedDB"
-            >
-              <Trash2 size={13} style={{ marginRight: '4px' }} />
-              <span className="btn-label">Erase</span>
-            </button>
-          )}
-
-          {/* Ghost Mode Status */}
-          <button
-            onClick={onToggleGhost}
-            style={isGhost ? styles.ghostActiveButton : styles.ghostButton}
-            title={
-              isGhost
-                ? `Ghost note pinned to network: ${simulatedNetwork || 'Offline State'}`
-                : 'Convert to network-bound Ghost note'
-            }
-          >
-            {isGhost ? (
-              <>
-                <Shield size={14} style={{ marginRight: '4px' }} />
-                <span className="btn-label">Ghost: {simulatedNetwork || 'Offline'}</span>
-              </>
-            ) : (
-              <>
-                <ShieldOff size={14} style={{ marginRight: '4px' }} />
-                <span className="btn-label">Standard</span>
-              </>
-            )}
-          </button>
-
-          {/* Share note button */}
-          <button
-            onClick={handleShare}
-            style={shareCopied ? styles.shareActiveButton : styles.shareButton}
-            title="Generate stateless Zero-DB URL hash"
-            disabled={!editorContent.trim()}
-            className={shareCopied ? "share-active-btn" : ""}
-          >
-            {shareCopied ? (
-              <Check size={14} style={{ marginRight: '4px' }} className="share-active-icon" />
-            ) : (
-              <Share2 size={14} style={{ marginRight: '4px' }} />
-            )}
-            <span className="btn-label">{shareCopied ? 'Copied!' : 'Share'}</span>
-          </button>
-
-          {/* Editor view controls */}
+          {/* 1. Editor view controls */}
           <div style={styles.segmentedControl} className="desktop-only">
             <button
               onClick={() => setViewMode('write')}
@@ -285,6 +218,57 @@ export const Workspace: React.FC<WorkspaceProps> = ({
           >
             {viewMode === 'preview' ? <Edit2 size={14} /> : <Eye size={14} />}
           </button>
+
+          {/* 2. Ghost Mode Status */}
+          <button
+            onClick={onToggleGhost}
+            style={isGhost ? styles.ghostActiveButton : styles.ghostButton}
+            title={
+              isGhost
+                ? `Ghost note pinned to network: ${simulatedNetwork || 'Offline State'}`
+                : 'Convert to network-bound Ghost note'
+            }
+          >
+            {isGhost ? (
+              <>
+                <Shield size={14} style={{ marginRight: '4px' }} />
+                <span className="btn-label">Ghost: {simulatedNetwork || 'Offline'}</span>
+              </>
+            ) : (
+              <>
+                <ShieldOff size={14} style={{ marginRight: '4px' }} />
+                <span className="btn-label">Standard</span>
+              </>
+            )}
+          </button>
+
+          {/* 3. Share note button */}
+          <button
+            onClick={handleShare}
+            style={shareCopied ? styles.shareActiveButton : styles.shareButton}
+            title="Generate stateless Zero-DB URL hash"
+            disabled={!editorContent.trim()}
+            className={shareCopied ? "share-active-btn" : ""}
+          >
+            {shareCopied ? (
+              <Check size={14} style={{ marginRight: '4px' }} className="share-active-icon" />
+            ) : (
+              <Share2 size={14} style={{ marginRight: '4px' }} />
+            )}
+            <span className="btn-label">{shareCopied ? 'Copied!' : 'Share'}</span>
+          </button>
+
+          {/* 4. Erase Thought (only visible when a note is loaded) */}
+          {activeNote && (
+            <button
+              onClick={onDelete}
+              style={styles.deleteButton}
+              title="Wipe this thought permanently from IndexedDB"
+            >
+              <Trash2 size={13} style={{ marginRight: '4px' }} />
+              <span className="btn-label">Erase</span>
+            </button>
+          )}
         </div>
       </header>
 
