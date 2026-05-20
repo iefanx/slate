@@ -327,8 +327,7 @@ export default function App() {
 
   // 13. Lock Vault & Clear memory credentials
   const handleLockVault = () => {
-    localStorage.removeItem('slate_remembered_password');
-    sessionStorage.removeItem('slate_explicit_locked');
+    sessionStorage.setItem('slate_explicit_locked', 'true');
     setCryptoKey(null);
     setNotes([]);
     setActiveNoteId(null);

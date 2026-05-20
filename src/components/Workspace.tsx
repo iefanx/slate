@@ -105,16 +105,20 @@ export const Workspace: React.FC<WorkspaceProps> = ({
   onToggleSidebar,
   onDelete,
 }) => {
-  const [viewMode, setViewMode] = useState<'write' | 'preview' | 'split'>('split');
+  const [viewMode, setViewMode] = useState<'write' | 'preview' | 'split'>(
+    window.innerWidth < 900 ? 'write' : 'split'
+  );
   const [shareCopied, setShareCopied] = useState<boolean>(false);
 
   // Sync editor mode with screen size on load
   useEffect(() => {
+    let wasMobile = window.innerWidth < 900;
+    
     const handleResize = () => {
-      if (window.innerWidth < 900) {
-        setViewMode('write');
-      } else {
-        setViewMode('split');
+      const isMobileNow = window.innerWidth < 900;
+      if (isMobileNow !== wasMobile) {
+        setViewMode(isMobileNow ? 'write' : 'split');
+        wasMobile = isMobileNow;
       }
     };
     
