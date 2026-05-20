@@ -304,12 +304,6 @@ export const Workspace: React.FC<WorkspaceProps> = ({
       {/* Editor Footer Metrics */}
       <footer style={styles.footer} className="workspace-footer">
         <div style={styles.footerSection}>
-          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', marginRight: '12px' }}>
-            <span style={isDirty ? styles.modifiedDotSmall : styles.savedDotSmall} />
-            <span style={{ fontSize: '11px', fontFamily: 'var(--font-mono)' }}>
-              {isDirty ? 'syncing' : 'saved'}
-            </span>
-          </span>
           <Wifi size={12} style={{ marginRight: '4px', opacity: 0.8 }} />
           <span style={styles.footerLabel} className="desktop-only">environment:</span>
           <span style={styles.footerVal}>{simulatedNetwork || 'Offline Sandbox'}</span>
@@ -326,8 +320,17 @@ export const Workspace: React.FC<WorkspaceProps> = ({
             <span style={styles.footerVal}>{getCharCount()}</span>c
           </span>
         </div>
-        <div style={styles.footerSection} className="desktop-only">
-          <kbd>Cmd</kbd> + <kbd>/</kbd> to command
+        <div style={styles.footerSection}>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', marginRight: '12px' }} className="desktop-only">
+            <kbd>Cmd</kbd> + <kbd>/</kbd> to command
+            <span style={styles.footerSeparator}>|</span>
+          </span>
+          <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+            <span style={isDirty ? styles.modifiedDotSmall : styles.savedDotSmall} />
+            <span style={{ fontSize: '11px', fontFamily: 'var(--font-mono)' }}>
+              {isDirty ? 'syncing' : 'saved'}
+            </span>
+          </span>
         </div>
       </footer>
     </div>
