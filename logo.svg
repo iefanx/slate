@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <!-- OLED True Black Backdrop -->
+  <rect width="512" height="512" rx="112" fill="#000000" />
+  
+  <!-- Outer Premium Thin Accent Ring -->
+  <circle cx="256" cy="256" r="216" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.1" />
+  
+  <g transform="translate(74, 74) scale(6.5)">
+    <!-- Background slate plate -->
+    <rect x="8" y="14" width="32" height="32" rx="4" transform="rotate(-10 8 14)" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="1.5" />
+    
+    <!-- Foreground slate plate -->
+    <rect x="16" y="10" width="32" height="32" rx="4" transform="rotate(-3 16 10)" fill="#ffffff" stroke="#ffffff" stroke-width="1.5" />
+    
+    <!-- The "S" character inside the foreground slate in beautiful serif style -->
+    <text x="32" y="30" fill="#000000" font-size="18" font-family="Georgia, Cambria, 'Times New Roman', Times, serif" font-weight="bold" text-anchor="middle" dominant-baseline="middle" transform="rotate(-3 32 30)">S</text>
+  </g>
+</svg>
